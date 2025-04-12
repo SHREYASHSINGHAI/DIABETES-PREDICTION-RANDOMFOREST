@@ -44,7 +44,7 @@ print(" ")
 
 
 #APPLYING RANDOMFOREST MODEL
-model=RandomForestClassifier()
+model=RandomForestClassifier(n_estimators=160,max_features=None)
 model.fit(x_train,y_train)
 prediction=model.predict(x_test)
 print(prediction)
@@ -53,3 +53,26 @@ print(prediction)
 #MODEL EVALUATION
 Accuracy=accuracy_score(y_test,prediction)
 print("The accuracy of the model is : ",Accuracy)
+
+
+#VISUALIZING THROUGH GRAPHS
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+features=["Glucose","Insulin","BMI","SkinThickness","BloodPressure","Outcome"]
+plt.figure(figsize=(10, 8))
+sns.heatmap(dataset.corr(), annot=True, cmap='coolwarm')
+plt.title("Feature Correlation Heatmap") #
+plt.show()
+
+sns.boxplot(x="Outcome", y="Pregnancies", data=dataset,palette="pastel")
+plt.title("Pregnancy-Diabetes Relation") #
+plt.show()
+
+sns.jointplot(data=dataset, x="Glucose", y="Insulin", kind="scatter",hue="Outcome", height=8)
+plt.title("Glucpse-Insulin impact")
+plt.show()
+
+sns.scatterplot(x="BMI", y="SkinThickness", data=dataset, hue="Outcome", palette="colorblind")
+plt.title("Skin Thickness-BMI Relation")
+plt.show()
