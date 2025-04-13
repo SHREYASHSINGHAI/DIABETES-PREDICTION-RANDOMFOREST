@@ -46,7 +46,7 @@ def split_dataset(dataset):
 
 #TRAINING MODEL WITH RANDOMFOREST
 def train_model(x_train,y_train):
-    model=RandomForestClassifier(n_estimators=160,max_features=None)
+    model=RandomForestClassifier(n_estimators=200,max_features=None)
     model.fit(x_train,y_train)
     print("Model training completed!")
     return model
