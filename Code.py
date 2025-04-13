@@ -59,6 +59,21 @@ print("The accuracy of the model is : ",Accuracy)
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+# Extracting feature importances
+importances = model.feature_importances_
+
+# Sorting the feature importances in descending order
+indices = np.argsort(importances)[::-1]
+
+# Plotting the feature importance
+plt.figure(figsize=(10, 6))
+plt.title("Feature Importance")
+plt.barh(range(X.shape[1]), importances[indices], align="center")
+plt.yticks(range(X.shape[1]), [X.columns[i] for i in indices])
+plt.xlabel("Relative Importance")
+plt.ylabel("Feature")
+plt.show()
+
 features=["Glucose","Insulin","BMI","SkinThickness","BloodPressure","Outcome"]
 plt.figure(figsize=(10, 8))
 sns.heatmap(dataset.corr(), annot=True, cmap='coolwarm')
