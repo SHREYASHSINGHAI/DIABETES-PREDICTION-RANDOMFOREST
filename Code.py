@@ -1,3 +1,4 @@
+#### TOO MUCHH BIASED DATASET ###########
 import pandas as pd
 import os
 from sklearn.impute import SimpleImputer
@@ -39,7 +40,11 @@ def prepare_features_labels(dataset):
 # CROSS-VALIDATION EVALUATION
 def cross_validate_model(X, y):
     model = RandomForestClassifier(n_estimators=160, max_samples=0.74, max_depth=None, max_features=3,class_weight="balanced")
-    scores = cross_val_score(model, X, y, cv=10, scoring='f1_weighted')
+    scores = cross_val_score(model, X, y, cv=10, scoring='f1_weighted')#f1_weighted takes both precision and recall into account 
+                                                                       #and averages them accounting for class imbalance.
+                                                                       
+                                                                       #cv=10 means 9 pe train hoga and 1 pe test
+                                                                       #and 10 times repeat hogi ye cheez.
     print("Cross-validation scores for each fold:", scores)
     print("Average cross-validation accuracy:", scores.mean())
     return model.fit(X, y)  # Optional: train final model on full data
